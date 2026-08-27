@@ -15,8 +15,7 @@ import (
 
 const shutdownTimeout = 15 * time.Second
 
-func StartServer(envs *env.Env) error {
-	mux := http.NewServeMux()
+func StartServer(envs *env.Env, mux http.Handler) error {
 
 	server := &http.Server{
 		Addr:    fmt.Sprintf(":%d", envs.Port),
@@ -56,7 +55,7 @@ func StartServer(envs *env.Env) error {
 
 	if err := server.Shutdown(shutdownCtx); err != nil {
 		closeErr := server.Close()
-		return errors.Join(fmt.Errorf("Gracefull shutdown: %w", err), closeErr)
+		return errors.Join(fmt.Errorf("Graceful shutdown: %w", err), closeErr)
 	}
 
 	err := <-serverErr

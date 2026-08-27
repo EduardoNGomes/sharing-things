@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/egomes/schedule/internal/env"
+	"github.com/egomes/schedule/internal/routes"
 	"github.com/egomes/schedule/internal/server"
 	_ "github.com/joho/godotenv/autoload"
 )
@@ -15,7 +16,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if err := server.StartServer(verifiedEnvs); err != nil {
+	mux := routes.New()
+
+	if err := server.StartServer(verifiedEnvs, mux); err != nil {
 		log.Fatal(err)
 	}
 }
