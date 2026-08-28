@@ -17,7 +17,7 @@ data "external_schema" "gorm" {
     "-mod=mod",
     "ariga.io/atlas-provider-gorm",
     "load",
-    "--path", "./internal/repositories",
+    "--path", "./internal/entities",
     "--dialect", "postgres", // mysql | postgres | sqlite | sqlserver
   ]
 }
