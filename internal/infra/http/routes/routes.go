@@ -3,7 +3,7 @@ package routes
 import (
 	"net/http"
 
-	"github.com/egomes/schedule/internal/hc"
+	"github.com/egomes/schedule/internal/infra/http/routes/hc"
 )
 
 func New() http.Handler {
