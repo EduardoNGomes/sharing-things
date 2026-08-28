@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	_ "ariga.io/atlas-provider-gorm/gormschema"
 	"github.com/egomes/schedule/internal/env"
 	"github.com/egomes/schedule/internal/routes"
 	"github.com/egomes/schedule/internal/server"
