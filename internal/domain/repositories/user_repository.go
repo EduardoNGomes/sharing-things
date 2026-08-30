@@ -1,10 +1,12 @@
 package repositories
 
 import (
+	"context"
+
 	"github.com/egomes/schedule/internal/domain/entities"
 )
 
 type UserRepository interface {
-	GetUserByEmail(email string) (*entities.User, error)
-	CreateUser(user entities.User) error
+	GetUserByEmail(ctx context.Context, email string) (*entities.User, error)
+	CreateUser(ctx context.Context, user entities.User) error
 }
