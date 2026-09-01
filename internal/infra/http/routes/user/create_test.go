@@ -18,7 +18,6 @@ import (
 )
 
 func TestSignUpRoute(t *testing.T) {
-
 	t.Run("[E2E]-[/SIGUP] Create user", func(t *testing.T) {
 		service := createServiceTest(t)
 
@@ -68,12 +67,14 @@ func TestSignUpRoute(t *testing.T) {
       "email": "alice@example.com",
       "password": "secret123"
   }`)
-		if _, err := server.Client().Post(
+		if b, err := server.Client().Post(
 			server.URL+"/signup",
 			"application/json",
 			bytes.NewBuffer(payload),
 		); err != nil {
 			t.Fatal(err)
+		} else {
+			b.Body.Close()
 		}
 
 		response, err := server.Client().Post(
@@ -84,6 +85,7 @@ func TestSignUpRoute(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
+
 		defer response.Body.Close()
 
 		if response.StatusCode != http.StatusConflict {
@@ -97,7 +99,6 @@ func TestSignUpRoute(t *testing.T) {
 			)
 		}
 	})
-
 }
 
 func createServiceTest(t *testing.T) *user.CreateUserService {
@@ -121,7 +122,8 @@ func createServiceTest(t *testing.T) *user.CreateUserService {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer databaseTest.CloseDatabase(t, schema, dbConn)
+
+	databaseTest.CloseDatabase(t, schema, dbConn)
 
 	return factories.CreateUserServiceFactory(database)
 
