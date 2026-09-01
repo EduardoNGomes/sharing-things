@@ -18,8 +18,11 @@ const shutdownTimeout = 15 * time.Second
 func StartServer(envs *env.Env, mux http.Handler) error {
 
 	server := &http.Server{
-		Addr:    fmt.Sprintf(":%d", envs.Port),
-		Handler: mux,
+		Addr:         fmt.Sprintf(":%d", envs.Port),
+		Handler:      mux,
+		ReadTimeout:  time.Second * 15,
+		WriteTimeout: time.Second * 15,
+		IdleTimeout:  time.Second * 60,
 	}
 
 	serverErr := make(chan error, 1)

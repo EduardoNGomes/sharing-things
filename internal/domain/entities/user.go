@@ -1,24 +1,31 @@
 package entities
 
-import (
-	"time"
-	"uuid"
-
-	"gorm.io/gorm"
-)
+import "uuid"
 
 type User struct {
-	UUID       uuid.UUID `gorm:"type:uuid;primary_key"`
-	InternalID uint
+	UUID       *uuid.UUID
+	InternalID *uint
 	Name       string
 	Email      string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
+	Password   string
 }
 
-func (u *User) BeforeCreate(tx *gorm.DB) error {
-	u.UUID = uuid.NewV7()
-	u.CreatedAt = time.Now().UTC()
-	u.UpdatedAt = time.Now().UTC()
-	return nil
+func (u User) GetUUID() *uuid.UUID {
+	return u.UUID
+}
+
+func (u User) GetInternalID() *uint {
+	return u.InternalID
+}
+
+func (u User) GetName() string {
+	return u.Name
+}
+
+func (u User) GetEmail() string {
+	return u.Email
+}
+
+func (u User) GetPassword() string {
+	return u.Password
 }
