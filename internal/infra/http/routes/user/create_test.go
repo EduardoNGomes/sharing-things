@@ -11,10 +11,8 @@ import (
 
 	databaseTest "github.com/egomes/schedule/internal/test/database"
 
-	createUserService "github.com/egomes/schedule/internal/application/services/user"
-	"github.com/egomes/schedule/internal/infra/cryptography"
 	"github.com/egomes/schedule/internal/infra/database"
-	gormrepositories "github.com/egomes/schedule/internal/infra/gorm-repositories"
+	"github.com/egomes/schedule/internal/infra/factories"
 	"github.com/egomes/schedule/internal/infra/http/routes"
 )
 
@@ -42,14 +40,7 @@ func TestSignUpRoute(t *testing.T) {
 		}
 		defer databaseTest.CloseDatabase(t, schema, dbConn)
 
-		userRepository := gormrepositories.GormUserRepository{
-			DB: database,
-		}
-
-		service := createUserService.NewCreateUserService(
-			cryptography.BCryptEncrypter{},
-			userRepository,
-		)
+		service := factories.CreateUserServiceFactory(database)
 
 		handler := routes.NewRoutes(service).New()
 		server := httptest.NewServer(handler)
@@ -106,14 +97,7 @@ func TestSignUpRoute(t *testing.T) {
 		}
 		defer databaseTest.CloseDatabase(t, schema, dbConn)
 
-		userRepository := gormrepositories.GormUserRepository{
-			DB: database,
-		}
-
-		service := createUserService.NewCreateUserService(
-			cryptography.BCryptEncrypter{},
-			userRepository,
-		)
+		service := factories.CreateUserServiceFactory(database)
 
 		handler := routes.NewRoutes(service).New()
 		server := httptest.NewServer(handler)

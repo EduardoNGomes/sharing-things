@@ -6,9 +6,8 @@ import (
 	_ "ariga.io/atlas-provider-gorm/gormschema"
 	"github.com/egomes/schedule/internal/application/services/user"
 	"github.com/egomes/schedule/internal/env"
-	"github.com/egomes/schedule/internal/infra/cryptography"
 	"github.com/egomes/schedule/internal/infra/database"
-	gormrepositories "github.com/egomes/schedule/internal/infra/gorm-repositories"
+	"github.com/egomes/schedule/internal/infra/factories"
 	"github.com/egomes/schedule/internal/infra/http/routes"
 	"github.com/egomes/schedule/internal/infra/http/server"
 	_ "github.com/joho/godotenv/autoload"
@@ -56,11 +55,7 @@ type Services struct {
 }
 
 func initServices(db *gorm.DB) *Services {
-	userRepository := gormrepositories.GormUserRepository{DB: db}
-
-	createUserService := user.NewCreateUserService(cryptography.BCryptEncrypter{},
-		userRepository,
-	)
+	createUserService := factories.CreateUserServiceFactory(db)
 
 	return &Services{
 		createUserService: createUserService,
