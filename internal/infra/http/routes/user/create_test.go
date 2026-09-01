@@ -9,6 +9,7 @@ import (
 	"testing"
 	"uuid"
 
+	"github.com/egomes/schedule/internal/application/services/user"
 	databaseTest "github.com/egomes/schedule/internal/test/database"
 
 	"github.com/egomes/schedule/internal/infra/database"
@@ -19,33 +20,12 @@ import (
 func TestSignUpRoute(t *testing.T) {
 
 	t.Run("[E2E]-[/SIGUP] Create user", func(t *testing.T) {
-		schema := "test_" + strings.ReplaceAll(
-			uuid.New().String(),
-			"-",
-			"",
-		)
-		envTest := databaseTest.DatabaseTestConfig(t, schema)
-
-		databaseTest.ApplyMigrations(t, envTest.DatabaseURL, schema)
-
-		database, err := database.DatabaseConnection(envTest)
-
-		if err != nil {
-			t.Fatal(err)
-		}
-
-		dbConn, err := database.DB()
-		if err != nil {
-			t.Fatal(err)
-		}
-		defer databaseTest.CloseDatabase(t, schema, dbConn)
-
-		service := factories.CreateUserServiceFactory(database)
+		service := createServiceTest(t)
 
 		handler := routes.NewRoutes(service).New()
 		server := httptest.NewServer(handler)
 
-		defer t.Cleanup(server.Close)
+		t.Cleanup(server.Close)
 
 		body := bytes.NewBufferString(`{
   "name": "Alice",
@@ -76,33 +56,12 @@ func TestSignUpRoute(t *testing.T) {
 	})
 
 	t.Run("[E2E]-[/SIGUP] Cannot create user with email already registered", func(t *testing.T) {
-		schema := "test_" + strings.ReplaceAll(
-			uuid.New().String(),
-			"-",
-			"",
-		)
-		envTest := databaseTest.DatabaseTestConfig(t, schema)
-
-		databaseTest.ApplyMigrations(t, envTest.DatabaseURL, schema)
-
-		database, err := database.DatabaseConnection(envTest)
-
-		if err != nil {
-			t.Fatal(err)
-		}
-
-		dbConn, err := database.DB()
-		if err != nil {
-			t.Fatal(err)
-		}
-		defer databaseTest.CloseDatabase(t, schema, dbConn)
-
-		service := factories.CreateUserServiceFactory(database)
+		service := createServiceTest(t)
 
 		handler := routes.NewRoutes(service).New()
 		server := httptest.NewServer(handler)
 
-		defer t.Cleanup(server.Close)
+		t.Cleanup(server.Close)
 
 		payload := []byte(`{
       "name": "Alice",
@@ -138,5 +97,32 @@ func TestSignUpRoute(t *testing.T) {
 			)
 		}
 	})
+
+}
+
+func createServiceTest(t *testing.T) *user.CreateUserService {
+	t.Helper()
+	schema := "test_" + strings.ReplaceAll(
+		uuid.New().String(),
+		"-",
+		"",
+	)
+	envTest := databaseTest.DatabaseTestConfig(t, schema)
+
+	databaseTest.ApplyMigrations(t, envTest.DatabaseURL, schema)
+
+	database, err := database.DatabaseConnection(envTest)
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	dbConn, err := database.DB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer databaseTest.CloseDatabase(t, schema, dbConn)
+
+	return factories.CreateUserServiceFactory(database)
 
 }
