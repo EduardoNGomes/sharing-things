@@ -55,11 +55,11 @@ func (r GormUserRepository) GetUserByEmail(ctx context.Context, email string) (*
 	}
 
 	user := entities.User{
-		Email:    userDB.Email,
-		Name:     userDB.Name,
-		Password: userDB.Password,
-		ID:       &userDB.InternalID,
-		UUID:     &userDB.UUID,
+		Email:      userDB.Email,
+		Name:       userDB.Name,
+		Password:   userDB.Password,
+		UUID:       &userDB.UUID,
+		InternalID: &userDB.InternalID,
 	}
 
 	return &user, nil

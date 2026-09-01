@@ -3,19 +3,19 @@ package entities
 import "uuid"
 
 type User struct {
-	UUID     *uuid.UUID
-	ID       *uint
-	Name     string
-	Email    string
-	Password string
+	UUID       *uuid.UUID
+	InternalID *uint
+	Name       string
+	Email      string
+	Password   string
 }
 
 func (u User) GetUUID() *uuid.UUID {
 	return u.UUID
 }
 
-func (u User) GetID() *uint {
-	return u.ID
+func (u User) GetInternalID() *uint {
+	return u.InternalID
 }
 
 func (u User) GetName() string {
