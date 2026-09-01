@@ -27,13 +27,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	dbConifg, err := databaseConnection.DB()
+	dbConfig, err := databaseConnection.DB()
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	defer dbConifg.Close()
+	defer dbConfig.Close()
 
 	services := initServices(databaseConnection)
 
