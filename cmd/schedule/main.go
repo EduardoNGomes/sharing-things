@@ -35,10 +35,6 @@ func main() {
 
 	defer dbConifg.Close()
 
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	services := initServices(databaseConnection)
 
 	r := routes.NewRoutes(services.createUserService)
