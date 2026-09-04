@@ -4,6 +4,7 @@ import "errors"
 
 var (
 	UserAlreadyExistsError = errors.New("user already exists")
-
-	UserNotFoundError = errors.New("user not found")
+	InvalidPasswordError   = errors.New("invalid password")
+	UserNotFoundError      = errors.New("user not found")
+	InvalidUUIDError       = errors.New("invalid uuid")
 )
