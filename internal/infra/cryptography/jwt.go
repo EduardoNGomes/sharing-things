@@ -27,7 +27,7 @@ func (e JWT) CreateToken(userUUID string) (string, error) {
 
 	key = []byte(e.secret)
 
-	t = jwt.NewWithClaims(jwt.SigningMethodES256,
+	t = jwt.NewWithClaims(jwt.SigningMethodHS256,
 		jwt.MapClaims{
 			"iss": "schedule",
 			"sub": userUUID,
@@ -35,6 +35,7 @@ func (e JWT) CreateToken(userUUID string) (string, error) {
 		})
 
 	s, err := t.SignedString(key)
+
 	if err != nil {
 		return "", err
 	}
