@@ -4,7 +4,6 @@ import (
 	"log"
 
 	_ "ariga.io/atlas-provider-gorm/gormschema"
-	"github.com/egomes/schedule/internal/application/services/user"
 	"github.com/egomes/schedule/internal/env"
 	"github.com/egomes/schedule/internal/infra/database"
 	"github.com/egomes/schedule/internal/infra/factories"
@@ -35,9 +34,9 @@ func main() {
 
 	defer dbConfig.Close()
 
-	services := initServices(databaseConnection)
+	services := initServices(databaseConnection, verifiedEnvs)
 
-	r := routes.NewRoutes(services.createUserService)
+	r := routes.NewRoutes(services)
 
 	mux := r.New()
 
@@ -46,14 +45,12 @@ func main() {
 	}
 }
 
-type Services struct {
-	createUserService *user.CreateUserService
-}
-
-func initServices(db *gorm.DB) *Services {
+func initServices(db *gorm.DB, env *env.Env) *routes.Services {
 	createUserService := factories.CreateUserServiceFactory(db)
+	loginService := factories.LoginServiceFactory(db, env)
 
-	return &Services{
-		createUserService: createUserService,
+	return &routes.Services{
+		CreateUserService: createUserService,
+		LoginService:      loginService,
 	}
 }

@@ -9,7 +9,13 @@ import (
 )
 
 type Routes struct {
-	userService *user.CreateUserService
+	createUserService *user.CreateUserService
+	loginService      *user.LoginService
+}
+
+type Services struct {
+	CreateUserService *user.CreateUserService
+	LoginService      *user.LoginService
 }
 
 func (r *Routes) New() http.Handler {
@@ -17,12 +23,16 @@ func (r *Routes) New() http.Handler {
 
 	hc.HcRoutes(mux)
 
-	userController.RegisterCreateUserRoute(mux, r.userService)
+	userController.RegisterCreateUserRoute(mux, r.createUserService)
+	userController.LoginRoute(mux, r.loginService)
+
 	return mux
 }
 
-func NewRoutes(userService *user.CreateUserService) *Routes {
+func NewRoutes(
+	services *Services) *Routes {
 	return &Routes{
-		userService: userService,
+		createUserService: services.CreateUserService,
+		loginService:      services.LoginService,
 	}
 }
