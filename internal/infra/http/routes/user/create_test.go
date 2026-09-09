@@ -5,23 +5,25 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
-	"uuid"
 
 	"github.com/egomes/schedule/internal/application/services/user"
-	databaseTest "github.com/egomes/schedule/internal/test/database"
+	"github.com/egomes/schedule/internal/test/database"
+	"gorm.io/gorm"
 
-	"github.com/egomes/schedule/internal/infra/database"
 	"github.com/egomes/schedule/internal/infra/factories"
 	"github.com/egomes/schedule/internal/infra/http/routes"
 )
 
 func TestSignUpRoute(t *testing.T) {
 	t.Run("[E2E]-[/SIGUP] Create user", func(t *testing.T) {
-		service := createServiceTest(t)
 
-		handler := routes.NewRoutes(service).New()
+		databaseTest := database.CreataDatabaseTest(t)
+		service := routes.Services{
+			CreateUserService: createServiceTest(t, databaseTest.Database),
+		}
+
+		handler := routes.NewRoutes(&service).New()
 		server := httptest.NewServer(handler)
 
 		t.Cleanup(server.Close)
@@ -55,9 +57,13 @@ func TestSignUpRoute(t *testing.T) {
 	})
 
 	t.Run("[E2E]-[/SIGUP] Cannot create user with email already registered", func(t *testing.T) {
-		service := createServiceTest(t)
 
-		handler := routes.NewRoutes(service).New()
+		databaseTest := database.CreataDatabaseTest(t)
+		service := routes.Services{
+			CreateUserService: createServiceTest(t, databaseTest.Database),
+		}
+
+		handler := routes.NewRoutes(&service).New()
 		server := httptest.NewServer(handler)
 
 		t.Cleanup(server.Close)
@@ -101,30 +107,9 @@ func TestSignUpRoute(t *testing.T) {
 	})
 }
 
-func createServiceTest(t *testing.T) *user.CreateUserService {
+func createServiceTest(t *testing.T, dbConn *gorm.DB) *user.CreateUserService {
 	t.Helper()
-	schema := "test_" + strings.ReplaceAll(
-		uuid.New().String(),
-		"-",
-		"",
-	)
-	envTest := databaseTest.DatabaseTestConfig(t, schema)
 
-	databaseTest.ApplyMigrations(t, envTest.DatabaseURL, schema)
-
-	database, err := database.DatabaseConnection(envTest)
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	dbConn, err := database.DB()
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	databaseTest.CloseDatabase(t, schema, dbConn)
-
-	return factories.CreateUserServiceFactory(database)
+	return factories.CreateUserServiceFactory(dbConn)
 
 }
