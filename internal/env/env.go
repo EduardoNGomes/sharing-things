@@ -15,6 +15,7 @@ type Env struct {
 	DatabaseMaxConnections         int           `env:"DATABASE_MAX_CONN" default:"100"`
 	DatabaseMaxConnectionsLifetime int           `env:"DATABASE_MAX_CONN_LIFETIME" default:"30"`
 	DatabaseMaxIdleTime            int           `env:"DATABASE_MAX_IDLE_TIME" default:"40"`
+	JWTSecret                      string        `env:"JWT_SECRET"`
 }
 
 func New() (*Env, error) {

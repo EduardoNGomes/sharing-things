@@ -34,7 +34,7 @@ func main() {
 
 	defer dbConfig.Close()
 
-	services := initServices(databaseConnection)
+	services := initServices(databaseConnection, verifiedEnvs)
 
 	r := routes.NewRoutes(services)
 
@@ -45,10 +45,12 @@ func main() {
 	}
 }
 
-func initServices(db *gorm.DB) *routes.Services {
+func initServices(db *gorm.DB, env *env.Env) *routes.Services {
 	createUserService := factories.CreateUserServiceFactory(db)
+	loginService := factories.LoginServiceFactory(db, env)
 
 	return &routes.Services{
 		CreateUserService: createUserService,
+		LoginService:      loginService,
 	}
 }
