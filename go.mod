@@ -1,4 +1,4 @@
-module github.com/egomes/schedule
+module github.com/egomes/sharing-things
 
 go 1.27.0
 

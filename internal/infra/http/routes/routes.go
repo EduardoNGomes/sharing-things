@@ -3,9 +3,9 @@ package routes
 import (
 	"net/http"
 
-	"github.com/egomes/schedule/internal/application/services/user"
-	"github.com/egomes/schedule/internal/infra/http/routes/hc"
-	userController "github.com/egomes/schedule/internal/infra/http/routes/user"
+	"github.com/egomes/sharing-things/internal/application/services/user"
+	"github.com/egomes/sharing-things/internal/infra/http/routes/hc"
+	userController "github.com/egomes/sharing-things/internal/infra/http/routes/user"
 )
 
 type Routes struct {

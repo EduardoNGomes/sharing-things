@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/egomes/schedule/internal/env"
+	"github.com/egomes/sharing-things/internal/env"
 )
 
 const shutdownTimeout = 15 * time.Second

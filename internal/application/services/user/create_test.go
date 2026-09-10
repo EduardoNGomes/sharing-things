@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	domainErrors "github.com/egomes/schedule/internal/domain/errors"
-	"github.com/egomes/schedule/internal/test/cryptography"
-	inmemoryrepositories "github.com/egomes/schedule/internal/test/in-memory-repositories"
+	domainErrors "github.com/egomes/sharing-things/internal/domain/errors"
+	"github.com/egomes/sharing-things/internal/test/cryptography"
+	inmemoryrepositories "github.com/egomes/sharing-things/internal/test/in-memory-repositories"
 )
 
 func TestCreateUserService(t *testing.T) {

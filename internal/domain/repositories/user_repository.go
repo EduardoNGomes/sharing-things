@@ -3,7 +3,7 @@ package repositories
 import (
 	"context"
 
-	"github.com/egomes/schedule/internal/domain/entities"
+	"github.com/egomes/sharing-things/internal/domain/entities"
 )
 
 type UserRepository interface {

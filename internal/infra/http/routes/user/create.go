@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/egomes/schedule/internal/application/services/user"
-	domainErrors "github.com/egomes/schedule/internal/domain/errors"
-	routerErrors "github.com/egomes/schedule/internal/infra/http/routes/router-errors"
+	"github.com/egomes/sharing-things/internal/application/services/user"
+	domainErrors "github.com/egomes/sharing-things/internal/domain/errors"
+	routerErrors "github.com/egomes/sharing-things/internal/infra/http/routes/router-errors"
 	"github.com/go-playground/validator/v10"
 )
 
