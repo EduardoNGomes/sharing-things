@@ -12,11 +12,11 @@ import (
 	"testing"
 	"uuid"
 
-	"github.com/egomes/schedule/internal/domain/entities"
-	"github.com/egomes/schedule/internal/env"
-	"github.com/egomes/schedule/internal/infra/cryptography"
-	"github.com/egomes/schedule/internal/infra/database"
-	gormrepositories "github.com/egomes/schedule/internal/infra/gorm-repositories"
+	"github.com/egomes/sharing-things/internal/domain/entities"
+	"github.com/egomes/sharing-things/internal/env"
+	"github.com/egomes/sharing-things/internal/infra/cryptography"
+	"github.com/egomes/sharing-things/internal/infra/database"
+	gormrepositories "github.com/egomes/sharing-things/internal/infra/gorm-repositories"
 	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 )

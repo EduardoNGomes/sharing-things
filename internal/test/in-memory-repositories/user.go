@@ -5,8 +5,8 @@ import (
 	"slices"
 	"uuid"
 
-	"github.com/egomes/schedule/internal/domain/entities"
-	"github.com/egomes/schedule/internal/domain/errors"
+	"github.com/egomes/sharing-things/internal/domain/entities"
+	"github.com/egomes/sharing-things/internal/domain/errors"
 )
 
 type InMemoryUserRepository struct {

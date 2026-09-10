@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/egomes/schedule/internal/env"
+	"github.com/egomes/sharing-things/internal/env"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

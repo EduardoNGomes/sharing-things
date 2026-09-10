@@ -4,11 +4,11 @@ import (
 	"log"
 
 	_ "ariga.io/atlas-provider-gorm/gormschema"
-	"github.com/egomes/schedule/internal/env"
-	"github.com/egomes/schedule/internal/infra/database"
-	"github.com/egomes/schedule/internal/infra/factories"
-	"github.com/egomes/schedule/internal/infra/http/routes"
-	"github.com/egomes/schedule/internal/infra/http/server"
+	"github.com/egomes/sharing-things/internal/env"
+	"github.com/egomes/sharing-things/internal/infra/database"
+	"github.com/egomes/sharing-things/internal/infra/factories"
+	"github.com/egomes/sharing-things/internal/infra/http/routes"
+	"github.com/egomes/sharing-things/internal/infra/http/server"
 	_ "github.com/joho/godotenv/autoload"
 	"gorm.io/gorm"
 )

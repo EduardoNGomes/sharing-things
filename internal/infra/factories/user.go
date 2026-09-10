@@ -1,10 +1,10 @@
 package factories
 
 import (
-	"github.com/egomes/schedule/internal/application/services/user"
-	"github.com/egomes/schedule/internal/env"
-	"github.com/egomes/schedule/internal/infra/cryptography"
-	gormrepositories "github.com/egomes/schedule/internal/infra/gorm-repositories"
+	"github.com/egomes/sharing-things/internal/application/services/user"
+	"github.com/egomes/sharing-things/internal/env"
+	"github.com/egomes/sharing-things/internal/infra/cryptography"
+	gormrepositories "github.com/egomes/sharing-things/internal/infra/gorm-repositories"
 	"gorm.io/gorm"
 )
 

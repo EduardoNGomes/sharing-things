@@ -7,12 +7,12 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/egomes/schedule/internal/application/services/user"
-	"github.com/egomes/schedule/internal/test/database"
+	"github.com/egomes/sharing-things/internal/application/services/user"
+	"github.com/egomes/sharing-things/internal/test/database"
 	"gorm.io/gorm"
 
-	"github.com/egomes/schedule/internal/infra/factories"
-	"github.com/egomes/schedule/internal/infra/http/routes"
+	"github.com/egomes/sharing-things/internal/infra/factories"
+	"github.com/egomes/sharing-things/internal/infra/http/routes"
 )
 
 func TestSignUpRoute(t *testing.T) {

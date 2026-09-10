@@ -29,7 +29,7 @@ func (e JWT) CreateToken(userUUID string) (string, error) {
 
 	t = jwt.NewWithClaims(jwt.SigningMethodHS256,
 		jwt.MapClaims{
-			"iss": "schedule",
+			"iss": "sharing-things",
 			"sub": userUUID,
 			"exp": time.Now().Add(time.Hour * 24).Unix(),
 		})

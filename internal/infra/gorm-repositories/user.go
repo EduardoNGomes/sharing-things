@@ -6,8 +6,8 @@ import (
 	"time"
 	"uuid"
 
-	"github.com/egomes/schedule/internal/domain/entities"
-	domainErrors "github.com/egomes/schedule/internal/domain/errors"
+	"github.com/egomes/sharing-things/internal/domain/entities"
+	domainErrors "github.com/egomes/sharing-things/internal/domain/errors"
 	"gorm.io/gorm"
 )
 

@@ -6,9 +6,9 @@ import (
 	"testing"
 	"uuid"
 
-	userEntities "github.com/egomes/schedule/internal/domain/entities"
-	"github.com/egomes/schedule/internal/test/cryptography"
-	inmemoryrepositories "github.com/egomes/schedule/internal/test/in-memory-repositories"
+	userEntities "github.com/egomes/sharing-things/internal/domain/entities"
+	"github.com/egomes/sharing-things/internal/test/cryptography"
+	inmemoryrepositories "github.com/egomes/sharing-things/internal/test/in-memory-repositories"
 )
 
 func TestLoginService(t *testing.T) {

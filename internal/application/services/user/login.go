@@ -3,9 +3,9 @@ package user
 import (
 	"context"
 
-	"github.com/egomes/schedule/internal/domain/cryptography"
-	domainErrors "github.com/egomes/schedule/internal/domain/errors"
-	"github.com/egomes/schedule/internal/domain/repositories"
+	"github.com/egomes/sharing-things/internal/domain/cryptography"
+	domainErrors "github.com/egomes/sharing-things/internal/domain/errors"
+	"github.com/egomes/sharing-things/internal/domain/repositories"
 )
 
 type LoginServiceDTO struct {
